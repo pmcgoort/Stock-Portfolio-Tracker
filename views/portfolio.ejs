@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Portfolio</title>
+</head>
+
+<body>
+  <h1 id='header'>Portfolio</h1>
+
+  <table id='table' style='width: 100%; max-width: 700px'>
+    <tr id='tableHeader'>
+      <td style='font-weight: bold'>Stock</td>
+      <td style='font-weight: bold'>Shares</td>
+      <td style='font-weight: bold'>Value</td>
+    </tr>
+
+</table>
+
+<p id='totalValue'></p>
+
+  <script src='ejs.js'></script>
+  <script>
+    var unrefinedPortfolio = '<%= portfolio %>'
+    var username = '<%= username %>'
+    document.getElementById('header').innerHTML = username + '\'s Portfolio'
+
+    var portfolio = []
+
+    for(let i = 0; i < unrefinedPortfolio.length;){
+      var item1 = ''
+      var item2 = ''
+      var item3 = ''
+      while(unrefinedPortfolio[i] !== ','){
+        item1 += unrefinedPortfolio[i]
+        i++
+      }
+      i++
+      while(unrefinedPortfolio[i] !== ','){
+        item2 += unrefinedPortfolio[i]
+        i++
+      }
+      i++
+      while(i < unrefinedPortfolio.length && unrefinedPortfolio[i] !== ','){
+        item3 += unrefinedPortfolio[i]
+        i++
+      }
+      i++
+      portfolio.push([item1, item2, item3])
+    }
+
+    var totalValue = 0
+    for(let i = 0; i < portfolio.length; i++){
+      var tr = document.createElement('tr')
+      var tdStock = document.createElement('td')
+      var tdShares = document.createElement('td')
+      var tdValue = document.createElement('td')
+      var value = parseInt(portfolio[i][1]) * parseInt(portfolio[i][2])
+      totalValue += value
+
+      tdStock.appendChild(document.createTextNode(portfolio[i][0]))
+      tdShares.appendChild(document.createTextNode(portfolio[i][1]))
+      tdValue.appendChild(document.createTextNode('$' + value))
+
+      tr.appendChild(tdStock)
+      tr.appendChild(tdShares)
+      tr.appendChild(tdValue)
+
+      document.getElementById('table').appendChild(tr)
+    }
+
+    //adding total value
+    document.getElementById('totalValue').innerHTML = 'Total Value: $' + totalValue
+
+
+  </script>
+</body>
+
+
+</html>

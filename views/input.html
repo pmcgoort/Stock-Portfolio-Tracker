@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Stock Portfolio Tracker</title>
+</head>
+
+<body>
+  <div class='container'>
+    <h1 id='header'>Stock Portfolio Tracker</h1>
+    <form action='/api/input' method='post'>
+      <h2>Add stock:</h2>
+      <input id='username' type='text' name='username' placeholder='Username' required>
+      <input id='stockSymbol' type='text' name='symbol' placeholder='Stock Symbol' required>
+      <input id='shareCount' type='number' step='0.001' name='shares' placeholder='Number of Shares' required>
+      <input type='submit' value='Add stock'>
+    </form>
+
+</br>
+
+    <form action='/portfolio' method='get'>
+      <h2 id='portfolio'>Get Portfolio:</h2>
+      <input id='usernamePortfolio' type='text' name='usernamePortfolio' placeholder='Username' required>
+      <input type='submit' value='Portfolio'>
+    </form>
+  </div>
+</body>
+
+</html>
